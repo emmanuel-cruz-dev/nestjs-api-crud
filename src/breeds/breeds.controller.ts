@@ -26,17 +26,17 @@ export class BreedsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.breedsService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.breedsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBreedDto: UpdateBreedDto) {
-    return this.breedsService.update(+id, updateBreedDto);
+  update(@Param('id') id: number, @Body() updateBreedDto: UpdateBreedDto) {
+    return this.breedsService.update(id, updateBreedDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.breedsService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.breedsService.remove(id);
   }
 }
