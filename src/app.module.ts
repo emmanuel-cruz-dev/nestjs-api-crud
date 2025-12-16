@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CatsModule } from './cats/cats.module';
+import { BreedsModule } from './breeds/breeds.module';
 
 @Module({
   imports: [
@@ -9,7 +10,6 @@ import { CatsModule } from './cats/cats.module';
       isGlobal: true,
       envFilePath: '.env',
     }),
-    CatsModule,
     TypeOrmModule.forRoot({
       type: process.env.DB_MYSQL_TYPE as 'mysql',
       host: process.env.DB_MYSQL_HOST || 'localhost',
@@ -20,6 +20,8 @@ import { CatsModule } from './cats/cats.module';
       autoLoadEntities: true,
       synchronize: process.env.DB_MYSQL_SYNCHRONIZE === 'true',
     }),
+    CatsModule,
+    BreedsModule,
   ],
   controllers: [],
   providers: [],
