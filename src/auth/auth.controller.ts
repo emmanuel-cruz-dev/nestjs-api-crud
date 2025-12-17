@@ -1,17 +1,11 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
-import { Request } from 'express';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { Role } from '../common/enums/role.enum';
 import { Auth } from './decorators/auth.decorator';
-
-interface RequestWithUser extends Request {
-  user: {
-    email: string;
-    role: string;
-  };
-}
+import { ActiveUser } from 'src/common/decorators/active-user.decorator';
+import { type UserActiveInterface } from 'src/common/interfaces/user-active.interface';
 
 @Controller('auth')
 export class AuthController {
@@ -29,7 +23,7 @@ export class AuthController {
 
   @Get('profile')
   @Auth(Role.USER)
-  profile(@Req() req: RequestWithUser) {
-    return this.authService.profile(req.user);
+  profile(@ActiveUser() user: UserActiveInterface) {
+    return this.authService.profile(user);
   }
 }
