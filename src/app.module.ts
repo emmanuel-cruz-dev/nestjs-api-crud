@@ -5,6 +5,7 @@ import { CatsModule } from './cats/cats.module';
 import { BreedsModule } from './breeds/breeds.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { AuthModule } from './auth/auth.module';
       password: process.env.DB_POSTGRES_PASSWORD || 'root',
       database: process.env.DB_POSTGRES_DATABASE || 'db_crud',
       autoLoadEntities: true,
-      synchronize: process.env.DB_POSTGRES_SYNCHRONIZE === 'true',
+      synchronize: true,
       ssl: process.env.DB_POSTGRES_SSL === 'true',
       extra: {
         ssl:
@@ -35,6 +36,7 @@ import { AuthModule } from './auth/auth.module';
     BreedsModule,
     UsersModule,
     AuthModule,
+    HealthModule,
   ],
   controllers: [],
   providers: [],
