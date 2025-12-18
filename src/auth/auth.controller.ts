@@ -4,7 +4,7 @@ import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { Role } from '../common/enums/role.enum';
 import { Auth } from './decorators/auth.decorator';
-import { ActiveUser } from 'src/common/decorators/active-user.decorator';
+import { ActiveUser } from '../common/decorators/active-user.decorator';
 import { type UserActiveInterface } from 'src/common/interfaces/user-active.interface';
 
 @Controller('auth')
