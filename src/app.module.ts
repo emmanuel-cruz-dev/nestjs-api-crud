@@ -21,6 +21,15 @@ import { AuthModule } from './auth/auth.module';
       database: process.env.DB_POSTGRES_DATABASE || 'db_crud',
       autoLoadEntities: true,
       synchronize: process.env.DB_POSTGRES_SYNCHRONIZE === 'true',
+      ssl: process.env.DB_POSTGRES_SSL === 'true',
+      extra: {
+        ssl:
+          process.env.DB_POSTGRES_SSL === 'true'
+            ? {
+                rejectUnauthorized: false,
+              }
+            : null,
+      },
     }),
     CatsModule,
     BreedsModule,
