@@ -1,4 +1,6 @@
+import { Role } from '../enums/role.enum';
+
 export interface UserActiveInterface {
   email: string;
-  role: string;
+  role: Role;
 }
