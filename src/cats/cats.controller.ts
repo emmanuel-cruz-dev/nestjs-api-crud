@@ -7,6 +7,12 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiForbiddenResponse,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
@@ -15,12 +21,16 @@ import { Role } from '../common/enums/role.enum';
 import { ActiveUser } from '../common/decorators/active-user.decorator';
 import { type UserActiveInterface } from '../common/interfaces/user-active.interface';
 
+@ApiBearerAuth()
+@ApiUnauthorizedResponse({ description: 'Unauthorized Bearer Auth' })
 @Auth(Role.USER)
 @Controller('cats')
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
   @Post()
+  @ApiCreatedResponse({ description: 'Cat created successfully' })
+  @ApiForbiddenResponse({ description: 'Forbidden' })
   create(
     @Body() createCatDto: CreateCatDto,
     @ActiveUser() user: UserActiveInterface,
